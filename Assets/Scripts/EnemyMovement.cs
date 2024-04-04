@@ -9,10 +9,21 @@ public class EnemyMovement : MonoBehaviour
 
     Animator animator;
 
+    private EnemyStats stats;
+
     void Start()
     {
+        stats = GetComponent<EnemyStats>();
         animator = GetComponentInChildren<Animator>();
         currentWaypoint = WaypointProvider.Instance.GetNextWaypoint();
+    }
+
+    IEnumerator RandomlyAttack() { 
+        while(true)
+        {
+            yield return new WaitForSeconds(Random.Range(3f, 8f));
+            animator.SetInteger("State", 5);
+        }
     }
 
     void Update()
@@ -37,6 +48,7 @@ public class EnemyMovement : MonoBehaviour
             if(currentWaypoint == null)
             {
                 // TODO - odebrat hr·Ëi HP?
+                Player.Instance.TakeDamage(stats.Damage);
                 Destroy(gameObject);
             }
         }

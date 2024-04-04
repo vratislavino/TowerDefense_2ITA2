@@ -8,11 +8,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Construction
   - Water
   - UI
-  - 
-  - 
+  - Enemy
+  - Tower
   - 
   - 
   - 
