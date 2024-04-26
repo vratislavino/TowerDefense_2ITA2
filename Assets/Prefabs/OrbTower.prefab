@@ -230,7 +230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 50
   rotatingPart: {fileID: 4870589357477148292}
-  rotationSpeed: 0.5
+  rotationSpeed: 5
 --- !u!1 &4870589359287798764
 GameObject:
   m_ObjectHideFlags: 0

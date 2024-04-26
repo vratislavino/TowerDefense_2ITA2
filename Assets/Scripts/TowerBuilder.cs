@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TowerBuilder : MonoBehaviour
 {
     [SerializeField]
-    private Tower towerPrefab;
+    private List<Tower> towerPrefabs;
 
     Camera cam;
 
@@ -31,7 +32,7 @@ public class TowerBuilder : MonoBehaviour
             if (hit)
             {
                 if(CheckPlace(hit.point))
-                CreateTower(hit.point);
+                    CreateTower(hit.point);
             }
         }
     }
@@ -39,12 +40,16 @@ public class TowerBuilder : MonoBehaviour
     private bool CheckPlace(Vector2 point)
     {
         var towersInRange = Physics2D.OverlapCircleAll(point, 1.2f, towerLayerMask);
+        if (towersInRange.Length > 0)
+        {
+            Debug.Log(string.Join(", ", towersInRange.Select(t => t.gameObject.name)));
+        }
         return towersInRange.Length == 0;
         
     }
 
     private void CreateTower(Vector2 point)
     {
-        Instantiate(towerPrefab, point, Quaternion.identity);
+        Instantiate(towerPrefabs[UnityEngine.Random.Range(0, towerPrefabs.Count)], point, Quaternion.identity);
     }
 }

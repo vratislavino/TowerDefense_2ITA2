@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class EnemyStats : MonoBehaviour
 {
-    static int count = 0;
-
     [SerializeField]
     private float damage;
 
@@ -38,7 +36,6 @@ public class EnemyStats : MonoBehaviour
     void Start()
     {
         Hp = maxHp;
-        count++;
     }
 
     public void TakeDamage(float damage)
@@ -52,10 +49,6 @@ public class EnemyStats : MonoBehaviour
 
     private void OnDestroy()
     {
-        count--;
-        if(count == 0)
-        {
-            Player.Instance.KilledLast();
-        }
+        GameManager.Instance.EnemyKilled(this);
     }
 }

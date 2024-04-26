@@ -6,12 +6,6 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    static Player instance;
-    public static Player Instance => instance;
-
-    public event Action GameLost;
-    public event Action GameWon;
-
     [SerializeField]
     private Image healthbar;
 
@@ -20,18 +14,13 @@ public class Player : MonoBehaviour
 
     private float currentHp;
 
-    private void Awake()
-    {
-        instance = this;
-    }
-
     public void TakeDamage(float damage)
     {
         currentHp -= damage;
         healthbar.fillAmount = currentHp/maxHp;
         if (currentHp < 0)
         {
-            GameLost?.Invoke();
+            GameManager.Instance.PlayerDied();
         }
     } 
 
@@ -40,10 +29,5 @@ public class Player : MonoBehaviour
     {
         currentHp = maxHp;
         healthbar.fillAmount = currentHp / maxHp;
-    }
-
-    internal void KilledLast()
-    {
-        GameWon?.Invoke();
     }
 }

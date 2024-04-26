@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrbTower : MonoBehaviour
+public class OrbTower : Tower
 {
-    [SerializeField]
-    protected int damage;
-
     public float Damage => damage;
 
     [SerializeField]
@@ -14,12 +11,6 @@ public class OrbTower : MonoBehaviour
 
     [SerializeField]
     private float rotationSpeed;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void FixedUpdate()
